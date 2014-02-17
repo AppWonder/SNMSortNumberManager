@@ -1,0 +1,7 @@
+ComponentContent1: WOComponentContent {
+}
+
+Hyperlink1: WOHyperlink {
+	action = sortNumberItem.sortNumberManager.moveUpInSortNumberingByOne;
+	disabled = sortNumberItem.sortNumberManager.isFirstInSortNumbering;
+}
