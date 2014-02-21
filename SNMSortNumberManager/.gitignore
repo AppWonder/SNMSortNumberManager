@@ -5,5 +5,5 @@
 *.war
 *.ear
 
-bin
-build
+bin/
+build/
