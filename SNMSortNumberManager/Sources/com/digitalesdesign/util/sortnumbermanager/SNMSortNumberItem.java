@@ -12,6 +12,8 @@ import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 
 public interface SNMSortNumberItem{
+    /**retuns a SNMSortNumberManager
+    **/
     public SNMSortNumberManager sortNumberManager();
     public Integer sortNumber();
     public NSArray<? extends SNMSortNumberItem> sortedArray();
