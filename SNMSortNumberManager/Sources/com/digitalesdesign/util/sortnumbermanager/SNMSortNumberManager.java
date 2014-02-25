@@ -7,25 +7,32 @@ package com.digitalesdesign.util.sortnumbermanager;
 //  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
 //
 
-import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
 public class SNMSortNumberManager {
     private SNMSortNumberItem item;
-    private EOEditingContext ec;
+    //private EOEditingContext ec;
     
     public SNMSortNumberManager(SNMSortNumberItem _item){
         item = _item;
-        ec = item.editingContext();
+        //ec = item.editingContext();
     }
     
     public static void rebuildSortNumbering(NSArray<SNMSortNumberItem> sortedArray){
+    	rebuildSortNumbering(sortedArray, true);
+    }
+  
+    
+    public static void rebuildSortNumbering(NSArray<SNMSortNumberItem> sortedArray, boolean autosave){
         for(int i = 0; i< sortedArray.count();i++){
             SNMSortNumberItem currentItem = sortedArray.objectAtIndex(i);
             currentItem.setSortNumber(new Integer(i));
-            currentItem.editingContext().saveChanges();
+            //currentItem.editingContext().saveChanges();
+            if(autosave){
+            	currentItem.saveOrdering();
+            }
         }
     }
     
@@ -47,18 +54,30 @@ public class SNMSortNumberManager {
     
     /**Repairs und returns sortNumber**/
     public Integer repairSortNumber(){
+       return repairSortNumber(true);
+    }
+    
+    /**Repairs und returns sortNumber**/
+    public Integer repairSortNumber(boolean autosave){
         Integer repairedSortNumber = new Integer(item.sortedArray().indexOfObject(item));
         item.setSortNumber(repairedSortNumber);
-        ec.saveChanges();
+        //ec.saveChanges();
+        if(autosave){
+        	item.saveOrdering();
+        }
         return repairedSortNumber;
     }
     
     public void moveToSortNumber(int sortNumber){
+    	moveToSortNumber(sortNumber, true);
+    }
+    
+    public void moveToSortNumber(int sortNumber, boolean autosave){
         if(sortNumber>=0&&sortNumber<item.sortedArray().count()){
             NSMutableArray<SNMSortNumberItem> resortedArray = new NSMutableArray<SNMSortNumberItem>(item.sortedArray());
             resortedArray.removeObject(item);
             resortedArray.insertObjectAtIndex(item,sortNumber);
-            rebuildSortNumbering(resortedArray);
+            rebuildSortNumbering(resortedArray, autosave);
         }
     }
     

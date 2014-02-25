@@ -8,7 +8,6 @@ package com.digitalesdesign.util.sortnumbermanager;
 //
 
 /**This interface provides a unified way to deal with Objects that are sorted with a SortOrderingMechanism**/
-import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 
 public interface SNMSortNumberItem{
@@ -18,5 +17,6 @@ public interface SNMSortNumberItem{
     public Integer sortNumber();
     public NSArray<? extends SNMSortNumberItem> sortedArray();
     public void setSortNumber(Integer value);
-    public EOEditingContext editingContext();
+   // public EOEditingContext editingContext();
+    public void saveOrdering();
 }
