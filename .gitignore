@@ -6,5 +6,6 @@
 *.ear
 
 .DS_STORE
-build
-bin
+build/
+bin/
+dist/
